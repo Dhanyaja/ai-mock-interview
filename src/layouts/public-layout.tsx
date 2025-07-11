@@ -1,12 +1,11 @@
-import Container from "@/components/container"
-import Footer from "@/components/footer"
+import {Footer} from "@/components/footer"
 import Header from "@/components/header"
 import AuthHandler from "@/handlers/auth-handler"
 import { Outlet } from "react-router"
 
 const PublicLayout = () => {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-full">
       <AuthHandler />
       <Header />
 

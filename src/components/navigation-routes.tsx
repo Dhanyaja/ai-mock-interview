@@ -18,7 +18,6 @@ const NavigationRoutes = ({ isMobile = false }: NavigationRoutesProps) => {
                     className={({ isActive }) => isActive ? "font-semibold" : "text-base"}
                     style={({isActive}) => {return isActive ? {color: "black" } : {color: "gray"}}}
                     >
-
                         {route.label}
                 </NavLink>
             ))}

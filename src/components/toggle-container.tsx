@@ -1,5 +1,6 @@
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -17,7 +18,7 @@ const ToggleContainer = () => {
 
   return (
     <Sheet>
-      <SheetTrigger className="block md:hidden" asChild>
+      <SheetTrigger className="block md:hidden" asChild >
         <Menu />
       </SheetTrigger>
       <SheetContent>

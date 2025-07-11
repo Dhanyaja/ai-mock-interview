@@ -10,7 +10,6 @@ import ToggleContainer from './toggle-container';
 const Header = () => {
 
   const { userId } = useAuth();
-  
 
   return (
     <header className={cn("w-full border-b duration-150 transition-all ease-in-out")}>
@@ -28,7 +27,6 @@ const Header = () => {
               style={({ isActive }) => { return isActive ? { color: "black" } : { color: "gray" } }}
             >
               Take An Interview
-
             </NavLink>}
           </nav>
 
