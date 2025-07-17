@@ -2,10 +2,9 @@ import { db } from '@/config/firebase.config';
 import type { Interview, UserAnswer } from '@/types';
 import { useAuth } from '@clerk/clerk-react';
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
-import React, { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { toast } from 'sonner';
-import { set } from 'zod';
 import LoaderPage from './loader-page';
 import CustomBreadCrumb from '@/components/custom-bread-crumb';
 import Headings from '@/components/headings';

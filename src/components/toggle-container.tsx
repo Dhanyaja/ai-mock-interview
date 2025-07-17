@@ -1,6 +1,5 @@
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -10,7 +9,6 @@ import { Menu } from "lucide-react"
 import NavigationRoutes from "./navigation-routes"
 import { useAuth } from "@clerk/clerk-react"
 import { NavLink } from "react-router-dom"
-import { cn } from "@/lib/utils"
 
 const ToggleContainer = () => {
 

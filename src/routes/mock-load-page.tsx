@@ -118,7 +118,7 @@
 import { db } from '@/config/firebase.config';
 import type { Interview } from '@/types';
 import { doc, getDoc } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router';
 import LoaderPage from './loader-page';
 import CustomBreadCrumb from '@/components/custom-bread-crumb';
@@ -151,6 +151,8 @@ const MockLoadPage = () => {
                     }
                 } catch (error) {
                     console.log(error);
+                } finally {
+                    setIsLoading(false)
                 }
             }
         }

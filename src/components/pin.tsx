@@ -4,17 +4,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import {
   Card,
-  CardAction,
-  CardContent,
   CardDescription,
   CardFooter,
-  CardHeader,
   CardTitle,
 } from "@/components/ui/card"
 import { Badge } from "./ui/badge";
 import { cn } from "@/lib/utils";
 import { TooltipButton } from "./tooltip-buttton";
-import { Eye, Newspaper, Sparkles } from "lucide-react";
+import { Eye, Newspaper, Sparkles, Trash2 } from "lucide-react";
 import { collection, doc, getDocs, query, where, writeBatch } from "firebase/firestore";
 import { db } from "@/config/firebase.config";
 import { toast } from "sonner";
@@ -32,7 +29,7 @@ const InterviewPin = ({ interview, onMockPage = false }: InterviewPinProps) => {
   const [loading, setLoading] = useState(false)
   const { userId } = useAuth();
 
-  const onDelete = async() => {
+  const onDelete = async () => {
     setLoading(true);
     try {
       const interviewRef = doc(db, "interviews", interview.id);
@@ -46,12 +43,12 @@ const InterviewPin = ({ interview, onMockPage = false }: InterviewPinProps) => {
       batch.delete(interviewRef);
       querySnap.forEach((docRef) => batch.delete(docRef.ref))
       await batch.commit();
-      toast("Success", {description: "Your interview has been removed"});
+      toast("Success", { description: "Your interview has been removed" });
     } catch (error) {
-        console.log(error);
-        toast("Error", {
-          description: "Something went wrong!. Please try again later"
-        })
+      console.log(error);
+      toast("Error", {
+        description: "Something went wrong!. Please try again later"
+      })
     } finally {
       setLoading(false);
     }
@@ -83,6 +80,15 @@ const InterviewPin = ({ interview, onMockPage = false }: InterviewPinProps) => {
               buttonClassName="hover:text-sky-500"
               icon={<Eye />}
               loading={false}
+            />
+            <TooltipButton
+              content="Delete"
+              buttonVariant={"ghost"}
+              onClick={onDelete}
+              disabled={false}
+              buttonClassName="hover:text-red-500"
+              icon={<Trash2 />}
+              loading={loading}
             />
             <TooltipButton
               content="Feedback"

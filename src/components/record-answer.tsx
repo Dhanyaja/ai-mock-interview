@@ -1,6 +1,6 @@
 import { useAuth } from '@clerk/clerk-react';
 import { CircleStop, Loader, Mic, RefreshCw, Save, Video, VideoOff, WebcamIcon } from 'lucide-react';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import useSpeechToText, { type ResultType } from "react-hook-speech-to-text"
 import { useParams } from 'react-router';
 import Webcam from 'react-webcam';
@@ -8,7 +8,7 @@ import { TooltipButton } from './tooltip-buttton';
 import { toast } from 'sonner';
 import { generateContentStream } from '@/scripts';
 import { SaveModal } from './save-modal';
-import { addDoc, collection, getDocs, query, serverTimestamp, where } from 'firebase/firestore';
+import { addDoc, collection, doc, getDocs, query, serverTimestamp, updateDoc, where } from 'firebase/firestore';
 import { db } from '@/config/firebase.config';
 
 
@@ -28,7 +28,6 @@ const RecordAnswer = ({ question, isWebCam, setIsWebCam }: RecordAnswerProps) =>
 
 
     const {
-        error,
         interimResult,
         isRecording,
         results,
@@ -124,7 +123,7 @@ const RecordAnswer = ({ question, isWebCam, setIsWebCam }: RecordAnswerProps) =>
         // console.log(aiResult)
         setLoading(true);
 
-        if(!aiResult){
+        if (!aiResult) {
             return;
         }
 
@@ -142,7 +141,7 @@ const RecordAnswer = ({ question, isWebCam, setIsWebCam }: RecordAnswerProps) =>
 
             // if the user already answered the question dont save it Again
 
-            if(!querySnap.empty){
+            if (!querySnap.empty) {
                 console.log("Query Snap Size:", querySnap.size);
                 toast.info("Already answered", {
                     description: "You have already answered this question"
@@ -160,8 +159,14 @@ const RecordAnswer = ({ question, isWebCam, setIsWebCam }: RecordAnswerProps) =>
                     userId,
                     createdAt: serverTimestamp()
                 });
+                const id = questionAnswerRef.id;
 
-                toast("Saved", {description: "Your answer has been saved.."})
+                await updateDoc(doc(db, "userAnswers", id), {
+                    id,
+                    updatedAt: serverTimestamp(),
+                });
+
+                toast("Saved", { description: "Your answer has been saved.." })
             }
 
             setUserAnswer("");
@@ -191,7 +196,7 @@ const RecordAnswer = ({ question, isWebCam, setIsWebCam }: RecordAnswerProps) =>
         <div className='w-full flex flex-col items-center gap-8 mt-4'>
             {/* save model */}
 
-            <SaveModal 
+            <SaveModal
                 isOpen={open}
                 onClose={() => setOpen(false)}
                 onConfirm={saveUserAnswer}

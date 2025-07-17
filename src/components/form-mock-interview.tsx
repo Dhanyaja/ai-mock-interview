@@ -5,7 +5,7 @@ import type { Interview } from "@/types"
 import CustomBreadCrumb from "./custom-bread-crumb"
 import { FormProvider, useForm, type UseFormProps } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import { useAuth } from "@clerk/clerk-react";
 import { toast } from "sonner";
 import Headings from "./headings";
