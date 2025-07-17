@@ -34,6 +34,9 @@ const FooterLink: React.FC<FooterLinkProps> = ({ to, children }) => {
       <Link
         to={to}
         className="hover:underline text-gray-300 hover:text-gray-100"
+        style = {{color: "rgb(209, 213, 219)"}}
+        onMouseEnter={e => (e.currentTarget.style.color = 'rgb(243, 244, 249)')}
+        onMouseLeave={e => (e.currentTarget.style.color = "rgb(209, 213, 219)")}
       >
         {children}
       </Link>
